@@ -4,6 +4,14 @@ Overview
 
 - This module provides functionality to broadcast a transaction to a server, monitor its status, and retrieve updates until the transaction is finalized. It supports broadcasting the transaction, checking its status, and handling various transaction outcomes (CONFIRMED, FAILED, PENDING, DNE).
 
+Files
+
+- transaction-client.ts: Contains the core logic of TransactionClient. The TransactionClient class broadcasts transactions and monitors their status via HTTP requests. It validates data types before sending a transaction and checks the transaction's status using a unique transaction hash.
+- transaction-queue-service.ts: Contains the core logic of TransactionQueueService. The TransactionQueueService class manages a queue of transactions and processes them using a TransactionClient. It listens for new transactions, broadcasts them, monitors their status, and handles results like confirmed, pending, or failed. If a transaction is pending, it's re-queued for later processing.
+- index.ts: Example script integrating TransactionClient with TransactionQueueService.
+- constant.ts: Contains enum of transaction status.
+- type.ts: Contains the type definitions used across the module.
+
 Features
 
 - Broadcast Transaction: Sends a POST request to broadcast transaction details (symbol, price, timestamp).
